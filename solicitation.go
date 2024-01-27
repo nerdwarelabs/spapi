@@ -13,9 +13,10 @@ func (s *Client) CreateProductReviewAndSellerFeedbackSolicitation(ctx context.Co
 	query.Add("marketplaceIds", s.Marketplace.ID)
 
 	u := url.URL{
-		Scheme: "https",
-		Host:   s.Marketplace.Endpoint,
-		Path:   fmt.Sprintf("/solicitations/v1/orders/%s/solicitations/productReviewAndSellerFeedback", orderId),
+		Scheme:   "https",
+		Host:     s.Marketplace.Endpoint,
+		Path:     fmt.Sprintf("/solicitations/v1/orders/%s/solicitations/productReviewAndSellerFeedback", orderId),
+		RawQuery: query.Encode(),
 	}
 
 	req := request{

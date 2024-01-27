@@ -126,7 +126,6 @@ type GetOrdersRequest struct {
 	LastUpdatedBefore time.Time
 	LastUpdatedAfter  time.Time
 	OrderStatuses     []string
-	MarketplaceId     string
 }
 
 func (s *Client) GetOrders(ctx context.Context, opts *GetOrdersRequest) ([]Order, error) {
@@ -157,7 +156,7 @@ func (s *Client) GetOrders(ctx context.Context, opts *GetOrdersRequest) ([]Order
 		qs.Set("OrderStatuses", strings.Join(opts.OrderStatuses, ","))
 	}
 
-	qs.Set("MarketplaceIds", opts.MarketplaceId)
+	qs.Set("MarketplaceIds", s.Marketplace.ID)
 
 	resp, err := s.paginateOrders(ctx, qs, -1)
 	if err != nil {
